@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/{{ mariadb_galera_version }}/centos{{ ansible_distribution_version[0] }}-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1

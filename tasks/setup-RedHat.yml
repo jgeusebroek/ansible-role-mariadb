@@ -1,0 +1,25 @@
+---
+- name: Enable MariaDB yum repository | RedHat
+  template:
+    src: MariaDB.repo.j2
+    dest: /etc/yum.repos.d/MariaDB.repo
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Import MariaDB GPG key | Redhat
+  rpm_key:
+    key: '{{ mariadb_galera_rpm_gpg_key }}'
+    state: present
+
+- name: Ensure MariaDB-client is installed | Redhat
+  yum:
+    name: '{{ mariadb_galera_client_package }}'
+    state: installed
+  when: 'mariadb_galera_install_client == True'
+
+- name: Ensure MariaDB-server is installed | Redhat
+  yum:
+    name: '{{ mariadb_galera_server_package }}'
+    state: installed
+  when: 'mariadb_galera_install_server == True'

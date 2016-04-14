@@ -1,0 +1,34 @@
+- name: Ensure server configuration is in place
+  template:
+    src: 'server.conf.j2'
+    dest: '{{ mariadb_galera_config_location }}'
+  notify:
+   - Restart MariaDB
+
+- name: Instantiate cluster on primary node, if not already done
+  shell: galera_new_cluster
+  args:
+    creates: '/var/lib/mysql/galera.cache'
+  when: role == "primary"
+
+- name: Enable and start MariaDB-galera service
+  service:
+    name: 'mysql'
+    state: started
+    enabled: yes
+
+# Flush handlers, to force restarting MariaDB BEFORE getting the status IF the server configuration has been changed
+# (otherwise the nodes might not have connected to eachother)
+- meta: flush_handlers
+  when: role == "primary" and mariadb_galera_fetch_status == True
+
+- name: Get MariaDB-Galera cluster status
+  shell: mysql -u root -e "SHOW GLOBAL STATUS WHERE Variable_name IN ('wsrep_ready', 'wsrep_cluster_size', 'wsrep_cluster_status', 'wsrep_connected');"
+  register: cluster_status
+  changed_when: false
+  when: role == "primary" and mariadb_galera_fetch_status == True
+
+- name: Show MariaDB-Galera cluster status
+  debug: msg="{{ cluster_status.stdout_lines }}"
+  changed_when: false
+  when: role == "primary" and mariadb_galera_fetch_status == True

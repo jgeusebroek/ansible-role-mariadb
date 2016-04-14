@@ -1,0 +1,10 @@
+---
+- name: Restart MariaDB
+  service:
+    name: '{{ mariadb_galera_service_name }}'
+    state: restarted
+
+- name: Restart MariaDB immediatly
+  service:
+    name: '{{ mariadb_galera_service_name }}'
+    state: restarted

@@ -1,0 +1,4 @@
+---
+mariadb_galera_server_package: mariadb-server
+mariadb_galera_client_package: mariadb-client
+mariadb_galera_config_location: /etc/mysql/my.cnf

@@ -1,0 +1,12 @@
+---
+mariadb_galera_install_server: True
+mariadb_galera_install_client: True
+
+mariadb_galera_rpm_gpg_key: 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB'
+mariadb_galera_apt_gpg_key_id: '0xcbcb082a1bb943db'
+
+mariadb_galera_version: "10.1"
+mariadb_galera_apt_mirror_base: 'http://mirror.i3d.net/pub/mariadb/repo'
+
+mariadb_galera_fetch_status: True
+mariadb_galera_service_name: mysql

@@ -1,0 +1,21 @@
+---
+- name: Import MariaDB GPG key | Debian / Ubuntu
+  apt_key:
+    keyserver: 'keyserver.ubuntu.com'
+    id: '{{ mariadb_galera_apt_gpg_key_id }}'
+
+- name: Enable MariaDB apt repository | Debian / Ubuntu
+  apt_repository:
+    repo: 'deb {{ mariadb_galera_apt_mirror_base }}/{{ mariadb_galera_version }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} main'
+    state: present
+    update_cache: yes
+
+- name: Ensure MariaDB-client is installed | Debian / Ubuntu
+  apt:
+    name: '{{ mariadb_galera_client_package }}'
+    state: installed
+
+- name: Ensure MariaDB-server is installed | Debian / Ubuntu
+  apt:
+    name: '{{ mariadb_galera_server_package }}'
+    state: installed
