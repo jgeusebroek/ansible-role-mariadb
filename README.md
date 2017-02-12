@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/jgeusebroek/ansible-role-mariadb-galera.svg?branch=master)](https://travis-ci.org/jgeusebroek/ansible-role-mariadb-galera)
+[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-jgeusebroek.mariadb--galera-blue.svg)](https://galaxy.ansible.com/jgeusebroek/mariadb-galera)
+
 # Ansible role: mariadb-galera
 
 An Ansible Role that installs and configures MariaDB-Galera RedHat/CentOS or Debian/Ubuntu.
@@ -31,4 +34,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2016 by [Jeroen Geusebroek](http://jeroengeusebroek.nl/).
+This role was created in 2017 by [Jeroen Geusebroek](http://jeroengeusebroek.nl/).
