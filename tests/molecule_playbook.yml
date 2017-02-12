@@ -4,5 +4,13 @@
   vars:
     mariadb_galera_version: 10.1
 
+  pre_tasks:
+    - name: Fix some weird overlayFS bug with TravisCI
+      file:
+        path: /var/lib/rpm/*
+        state: touch
+      changed_when: False
+      when: ansible_os_family == 'RedHat'
+
   roles:
     - role: jgeusebroek.mariadb-galera
