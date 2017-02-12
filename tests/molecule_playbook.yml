@@ -1,0 +1,8 @@
+---
+- hosts: all
+
+  vars:
+    mariadb_galera_version: 10.1
+
+  roles:
+    - role: jgeusebroek.mariadb-galera
