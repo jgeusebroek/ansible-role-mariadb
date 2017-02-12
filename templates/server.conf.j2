@@ -21,7 +21,7 @@
 wsrep_on=ON
 wsrep_provider={% if ansible_os_family == 'RedHat' %}/usr/lib64/galera/libgalera_smm.so{% else %}/usr/lib/galera/libgalera_smm.so{% endif %}
 
-wsrep_cluster_address=gcomm://{% if role != "primary" %}{{ primary }}{% endif %}
+wsrep_cluster_address=gcomm://{% if mariadb_galera_role != "primary" %}{{ mariadb_galera_primary }}{% endif %}
 
 binlog_format=ROW
 default_storage_engine=InnoDB
@@ -48,3 +48,8 @@ innodb_autoinc_lock_mode=2
 # If you use the same .cnf file for MariaDB of different versions,
 # use this group for options that older servers don't understand
 [mariadb-10.1]
+
+# This group is only read by MariaDB-10.2 servers.
+# If you use the same .cnf file for MariaDB of different versions,
+# use this group for options that older servers don't understand
+[mariadb-10.2]

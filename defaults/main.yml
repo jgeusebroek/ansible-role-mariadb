@@ -11,3 +11,6 @@ mariadb_galera_apt_mirror_base: 'http://mirror.i3d.net/pub/mariadb/repo'
 
 mariadb_galera_fetch_status: True
 mariadb_galera_service_name: mysql
+
+# Default role
+mariadb_galera_role: primary
