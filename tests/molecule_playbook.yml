@@ -5,12 +5,18 @@
     mariadb_galera_version: 10.1
 
   pre_tasks:
-    - name: Fix some weird overlayFS bug with TravisCI
+    - name: Fix (#1) some weird overlayFS bug with TravisCI
       file:
         path: /var/lib/rpm/*
         state: touch
       changed_when: False
       when: ansible_os_family == 'RedHat'
+
+    - name: Fix (#2) some weird overlayFS bug with TravisCI
+      shell: "yum clean all && rpm --rebuilddb"
+      changed_when: false
+      when: ansible_os_family == 'RedHat'
+      tags: skip_ansible_lint
 
   roles:
     - role: jgeusebroek.mariadb-galera
