@@ -5,6 +5,13 @@
     mariadb_galera_version: 10.1
 
   pre_tasks:
+    - name: Ensure gnupg is installed on Debian 9 (Stretch)
+      package:
+        name: gnupg
+        state: installed
+      changed_when: False
+      when: ansible_distribution_release == 'stretch'
+
     - name: Fix (#1) some weird overlayFS bug with TravisCI
       file:
         path: /var/lib/rpm/*
