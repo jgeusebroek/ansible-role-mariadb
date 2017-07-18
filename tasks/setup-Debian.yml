@@ -1,15 +1,10 @@
 ---
-- name: Import MariaDB GPG key | Ubuntu
+- name: Import MariaDB GPG keys | Debian / Ubuntu
   apt_key:
     keyserver: 'keyserver.ubuntu.com'
-    id: '{{ mariadb_galera_apt_gpg_key_id_ubuntu }}'
-  when: ansible_distribution == 'Ubuntu'
-
-- name: Import MariaDB GPG key | Debian
-  apt_key:
-    keyserver: 'keyserver.ubuntu.com'
-    id: '{{ mariadb_galera_apt_gpg_key_id_debian }}'
-  when: ansible_distribution == 'Debian'
+    id: '{{ item }}'
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  with_items: '{{ mariadb_galera_apt_gpg_keys }}'
 
 - name: Enable MariaDB apt repository | Debian / Ubuntu
   apt_repository:

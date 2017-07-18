@@ -8,6 +8,9 @@ ansible:
     debian8:
       mariadb_galera_role: nonprimary
       mariadb_galera_primary: centos7
+    debian9:
+      mariadb_galera_role: nonprimary
+      mariadb_galera_primary: centos7
     ubuntu1604:
       mariadb_galera_role: nonprimary
       mariadb_galera_primary: centos7
@@ -35,6 +38,17 @@ docker:
       #   4444: 4444
     - name: debian8
       image: jgeusebroek/debian8-molecule
+      image_version: latest
+      privileged: true
+      command: /lib/systemd/systemd
+      volume_mounts:
+        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+      ansible_groups:
+        - debian
+      links:
+        centos7: centos7
+    - name: debian9
+      image: jgeusebroek/debian9-molecule
       image_version: latest
       privileged: true
       command: /lib/systemd/systemd
