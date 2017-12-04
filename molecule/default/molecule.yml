@@ -21,17 +21,17 @@ platforms:
       #   4567: 4567
       #   4568: 4568
       #   4444: 4444
-    - name: debian8
-      image: jgeusebroek/debian8-molecule
-      image_version: latest
-      privileged: true
-      command: /lib/systemd/systemd
-      volumes:
-        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      groups:
-        - debian
-      links:
-        - centos7:centos7
+    # - name: debian8
+    #   image: jgeusebroek/debian8-molecule
+    #   image_version: latest
+    #   privileged: true
+    #   command: /lib/systemd/systemd
+    #   volumes:
+    #     - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    #   groups:
+    #     - debian
+    #   links:
+    #     - centos7:centos7
     - name: debian9
       image: jgeusebroek/debian9-molecule
       image_version: latest
