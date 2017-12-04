@@ -1,35 +1,20 @@
 ---
-ansible:
-  playbook: tests/molecule_playbook.yml
-  host_vars:
-    centos7:
-      mariadb_galera_role: primary
-      mariadb_galera_primary: localhost
-    debian8:
-      mariadb_galera_role: nonprimary
-      mariadb_galera_primary: centos7
-    debian9:
-      mariadb_galera_role: nonprimary
-      mariadb_galera_primary: centos7
-    ubuntu1604:
-      mariadb_galera_role: nonprimary
-      mariadb_galera_primary: centos7
-  ansiblecfg_defaults:
-    retry_files_enabled: False
-dependency:
-  name: galaxy
 driver:
   name: docker
-docker:
-  containers:
+lint:
+  name: yamllint
+  enabled: False
+  options:
+    config-file: ../../../resources/.yamllint
+platforms:
     - name: centos7
       image: jgeusebroek/centos7-molecule
       image_version: latest
       privileged: true
       command: /lib/systemd/systemd
-      volume_mounts:
+      volumes:
         - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      ansible_groups:
+      groups:
         - redhat
       # port_bindings:
       #   3306: 3306
@@ -41,33 +26,55 @@ docker:
       image_version: latest
       privileged: true
       command: /lib/systemd/systemd
-      volume_mounts:
+      volumes:
         - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      ansible_groups:
+      groups:
         - debian
       links:
-        centos7: centos7
+        - centos7:centos7
     - name: debian9
       image: jgeusebroek/debian9-molecule
       image_version: latest
       privileged: true
       command: /lib/systemd/systemd
-      volume_mounts:
+      volumes:
         - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      ansible_groups:
+      groups:
         - debian
       links:
-        centos7: centos7
+        - centos7:centos7
     - name: ubuntu1604
       image: jgeusebroek/ubuntu1604-molecule
       image_version: latest
       privileged: true
       command: /lib/systemd/systemd
-      volume_mounts:
+      volumes:
         - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      ansible_groups:
+      groups:
         - ubuntu
       links:
-        centos7: centos7
+        - centos7:centos7
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  inventory:
+    host_vars:
+      centos7:
+        mariadb_galera_role: primary
+        mariadb_galera_primary: localhost
+      debian8:
+        mariadb_galera_role: nonprimary
+        mariadb_galera_primary: centos7
+      debian9:
+        mariadb_galera_role: nonprimary
+        mariadb_galera_primary: centos7
+      ubuntu1604:
+        mariadb_galera_role: nonprimary
+        mariadb_galera_primary: centos7
+scenario:
+  name: default
 verifier:
   name: testinfra
+  lint:
+    name: flake8

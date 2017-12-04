@@ -25,5 +25,12 @@
       when: ansible_os_family == 'RedHat'
       tags: skip_ansible_lint
 
+    - name: Ensure apt-utils is installed on Ubuntu | Debian / Ubuntu
+      package:
+        name: apt-utils
+        state: installed
+      changed_when: False
+      when: ansible_os_family == 'Debian'
+
   roles:
     - role: jgeusebroek.mariadb-galera
