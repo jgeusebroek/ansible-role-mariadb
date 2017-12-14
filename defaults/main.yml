@@ -7,7 +7,7 @@ mariadb_galera_apt_gpg_keys:
   - '0xcbcb082a1bb943db'
   - '0xF1656F24C74CD1D8'
 
-mariadb_galera_version: "10.1"
+mariadb_galera_version: "10.2"
 mariadb_galera_apt_mirror_base: 'http://mirror.i3d.net/pub/mariadb/repo'
 
 mariadb_galera_fetch_status: True

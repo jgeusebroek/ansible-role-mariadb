@@ -2,7 +2,7 @@
 - hosts: all
 
   vars:
-    mariadb_galera_version: 10.1
+    mariadb_galera_version: 10.2
 
   pre_tasks:
     - name: Ensure gnupg is installed on Debian 9 (Stretch)
