@@ -14,4 +14,4 @@ mariadb_fetch_status: True
 mariadb_service_name: mysql
 
 # Default role
-mariadb_role: primary
+mariadb_galera_role: primary

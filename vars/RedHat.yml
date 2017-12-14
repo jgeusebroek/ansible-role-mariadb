@@ -1,4 +1,4 @@
 ---
 mariadb_server_package: MariaDB-server
 mariadb_client_package: MariaDB-client
-mariadb_config_location: /etc/my.cnf.d/server.cnf
+mariadb_server_config_location: /etc/my.cnf.d/server.cnf

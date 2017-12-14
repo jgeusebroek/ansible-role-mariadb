@@ -61,17 +61,17 @@ provisioner:
   inventory:
     host_vars:
       centos7:
-        mariadb_role: primary
-        mariadb_primary: localhost
+        mariadb_galera_role: primary
+        mariadb_galera_primary: localhost
       debian8:
-        mariadb_role: nonprimary
-        mariadb_primary: centos7
+        mariadb_galera_role: nonprimary
+        mariadb_galera_primary: centos7
       debian9:
-        mariadb_role: nonprimary
-        mariadb_primary: centos7
+        mariadb_galera_role: nonprimary
+        mariadb_galera_primary: centos7
       ubuntu1604:
-        mariadb_role: nonprimary
-        mariadb_primary: centos7
+        mariadb_galera_role: nonprimary
+        mariadb_galera_primary: centos7
 scenario:
   name: default
 verifier:
