@@ -21,7 +21,7 @@
 wsrep_on=ON
 wsrep_provider={% if ansible_os_family == 'RedHat' %}/usr/lib64/galera/libgalera_smm.so{% else %}/usr/lib/galera/libgalera_smm.so{% endif %}
 
-wsrep_cluster_address=gcomm://{% if mariadb_galera_role != "primary" %}{{ mariadb_galera_primary }}{% endif %}
+wsrep_cluster_address=gcomm://{% if mariadb_role != "primary" %}{{ mariadb_primary }}{% endif %}
 
 binlog_format=ROW
 default_storage_engine=InnoDB

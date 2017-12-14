@@ -1,17 +1,17 @@
 ---
-mariadb_galera_install_server: True
-mariadb_galera_install_client: True
+mariadb_install_server: True
+mariadb_install_client: True
 
-mariadb_galera_rpm_gpg_key: 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB'
-mariadb_galera_apt_gpg_keys:
+mariadb_rpm_gpg_key: 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB'
+mariadb_apt_gpg_keys:
   - '0xcbcb082a1bb943db'
   - '0xF1656F24C74CD1D8'
 
-mariadb_galera_version: "10.2"
-mariadb_galera_apt_mirror_base: 'http://mirror.i3d.net/pub/mariadb/repo'
+mariadb_version: "10.2"
+mariadb_apt_mirror_base: 'http://mirror.i3d.net/pub/mariadb/repo'
 
-mariadb_galera_fetch_status: True
-mariadb_galera_service_name: mysql
+mariadb_fetch_status: True
+mariadb_service_name: mysql
 
 # Default role
-mariadb_galera_role: primary
+mariadb_role: primary

@@ -26,7 +26,7 @@ cache:
 before_install:
   # While developing I like to name my roles similair to their Ansible Galaxy names.
   # These differ from their Github repository name.
-  - cd .. && mv ansible-role-mariadb-galera jgeusebroek.mariadb-galera && cd jgeusebroek.mariadb-galera
+  - cd .. && mv ansible-role-mariadb jgeusebroek.mariadb && cd jgeusebroek.mariadb
   # Upgrade Distro
   - sudo apt-get -qq update
 

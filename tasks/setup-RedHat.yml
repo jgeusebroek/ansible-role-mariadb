@@ -9,17 +9,17 @@
 
 - name: Import MariaDB GPG key | Redhat
   rpm_key:
-    key: '{{ mariadb_galera_rpm_gpg_key }}'
+    key: '{{ mariadb_rpm_gpg_key }}'
     state: present
 
 - name: Ensure MariaDB-client is installed | Redhat
   yum:
-    name: '{{ mariadb_galera_client_package }}'
+    name: '{{ mariadb_client_package }}'
     state: installed
-  when: 'mariadb_galera_install_client == True'
+  when: 'mariadb_install_client == True'
 
 - name: Ensure MariaDB-server is installed | Redhat
   yum:
-    name: '{{ mariadb_galera_server_package }}'
+    name: '{{ mariadb_server_package }}'
     state: installed
-  when: 'mariadb_galera_install_server == True'
+  when: 'mariadb_install_server == True'

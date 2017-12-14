@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/jgeusebroek/ansible-role-mariadb-galera.svg?branch=master)](https://travis-ci.org/jgeusebroek/ansible-role-mariadb-galera)
-[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-jgeusebroek.mariadb--galera-blue.svg)](https://galaxy.ansible.com/jgeusebroek/mariadb-galera)
+[![Build Status](https://travis-ci.org/jgeusebroek/ansible-role-mariadb.svg?branch=master)](https://travis-ci.org/jgeusebroek/ansible-role-mariadb)
+[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-jgeusebroek.mariadb-blue.svg)](https://galaxy.ansible.com/jgeusebroek/mariadb)
 
-# Ansible role: mariadb-galera
+# Ansible role: Mariadb
 
-An Ansible Role that installs and configures MariaDB-Galera RedHat/CentOS or Debian/Ubuntu.
+An Ansible Role that installs and configures Mariadb on RedHat/CentOS or Debian/Ubuntu.
 
 ## Requirements
 
@@ -22,7 +22,7 @@ None
       vars:
 
       roles:
-       - { role: jgeusebroek.mariadb-galera, tags: ["mariadb-galera"] }
+       - { role: jgeusebroek.mariadb, tags: ["mariadb"] }
 
 ## Example Variables
 

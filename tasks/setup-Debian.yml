@@ -4,20 +4,20 @@
     keyserver: 'keyserver.ubuntu.com'
     id: '{{ item }}'
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  with_items: '{{ mariadb_galera_apt_gpg_keys }}'
+  with_items: '{{ mariadb_apt_gpg_keys }}'
 
 - name: Enable MariaDB apt repository | Debian / Ubuntu
   apt_repository:
-    repo: 'deb {{ mariadb_galera_apt_mirror_base }}/{{ mariadb_galera_version }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} main'
+    repo: 'deb {{ mariadb_apt_mirror_base }}/{{ mariadb_version }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} main'
     state: present
     update_cache: yes
 
 - name: Ensure MariaDB-client is installed | Debian / Ubuntu
   apt:
-    name: '{{ mariadb_galera_client_package }}'
+    name: '{{ mariadb_client_package }}'
     state: installed
 
 - name: Ensure MariaDB-server is installed | Debian / Ubuntu
   apt:
-    name: '{{ mariadb_galera_server_package }}'
+    name: '{{ mariadb_server_package }}'
     state: installed
