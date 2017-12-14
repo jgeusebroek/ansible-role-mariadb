@@ -3,6 +3,7 @@
 
   vars:
     mariadb_version: 10.2
+    mariadb_fetch_wsrep_status: True
 
   pre_tasks:
     - name: Ensure gnupg is installed on Debian 9 (Stretch)

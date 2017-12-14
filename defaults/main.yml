@@ -10,8 +10,8 @@ mariadb_apt_gpg_keys:
 mariadb_version: "10.2"
 mariadb_apt_mirror_base: 'http://mirror.i3d.net/pub/mariadb/repo'
 
-mariadb_fetch_status: True
+mariadb_fetch_wsrep_status: False
 mariadb_service_name: mysql
 
-# Default role
+# Default galera role
 mariadb_galera_role: primary
