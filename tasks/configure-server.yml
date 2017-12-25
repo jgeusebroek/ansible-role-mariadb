@@ -1,3 +1,12 @@
+- name: Ensure log directory exists
+  file:
+    path: '{{ mariadb_logbase_dir }}'
+    state: directory
+    owner: '{{ mariadb_logbase_dir_owner }}'
+    group: '{{ mariadb_logbase_dir_group }}'
+    mode: '{{ mariadb_logbase_dir_mode }}'
+  when: mariadb_log_error != 'syslog' and mariadb_log != 'syslog'
+
 - name: Ensure server configuration is in place
   template:
     src: 'server.conf.j2'

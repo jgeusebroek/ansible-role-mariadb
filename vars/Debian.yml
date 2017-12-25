@@ -1,4 +1,8 @@
 ---
-mariadb_server_package: mariadb-server
-mariadb_client_package: mariadb-client
+mariadb_packages: [ 'mariadb-server', 'mariadb-client', 'python-mysqldb' ]
 mariadb_server_config_location: /etc/mysql/my.cnf
+
+__mariadb_logbase_dir: '/var/log/mysql'
+__mariadb_logbase_dir_owner: '{{ mariadb_user }}'
+__mariadb_logbase_dir_group: adm
+__mariadb_logbase_dir_mode: '2750'

@@ -12,12 +12,9 @@
     state: present
     update_cache: yes
 
-- name: Ensure MariaDB-client is installed | Debian / Ubuntu
-  apt:
-    name: '{{ mariadb_client_package }}'
+- name: Ensure MariaDB packages are installed | Debian / Ubuntu
+  package:
+    name: '{{ item }}'
     state: installed
-
-- name: Ensure MariaDB-server is installed | Debian / Ubuntu
-  apt:
-    name: '{{ mariadb_server_package }}'
-    state: installed
+  with_items: '{{ mariadb_packages }}'
+  register: deb_mariadb_install_packages

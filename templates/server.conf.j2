@@ -1,55 +1,114 @@
 # {{ ansible_managed }}
 
-#
-# These groups are read by MariaDB server.
-# Use it for options that only the server (but not clients) should see
-#
-# See the examples of server my.cnf files in /usr/share/mysql/
-#
+[client]
+port    = {{ mariadb_port }}
+socket  = {{ mariadb_socket }}
 
-# this is read by the standalone daemon and embedded servers
-[server]
+{% if mariadb_client_options is defined and mariadb_client_options is not none %}
+{% for key, value in mariadb_client_options.iteritems() %}
+{{ key }}{% if value is not none %} = {{ value }}{% endif %}
 
-# this is only for the mysqld standalone daemon
+{% endfor %}
+
+{% endif %}
+
+[mysqldump]
+quick
+max_allowed_packet = {{ mariadb_mysqldump_max_allowed_packet }}
+
 [mysqld]
+user = {{ mariadb_user }}
+pid-file = {{ mariadb_pid }}
+socket = {{ mariadb_socket }}
+port = {{ mariadb_port }}
+bind-address = {{ mariadb_bind_address }}
+{% if mariadb_skip_name_resolve %}
+skip-name-resolve
+{% endif %}
+{% if mariadb_sql_mode %}
+sql_mode = {{ mariadb_sql_mode }}
+{% endif %}
+basedir = {{ mariadb_basedir }}
+datadir = {{ mariadb_datadir }}
+tmpdir = {{ mariadb_tmpdir }}
 
-#
-# * Galera-related settings
-#
+# Memory settings.
+key_buffer_size = {{ mariadb_key_buffer_size }}
+max_allowed_packet = {{ mariadb_max_allowed_packet }}
+table_open_cache = {{ mariadb_table_open_cache }}
+sort_buffer_size = {{ mariadb_sort_buffer_size }}
+read_buffer_size = {{ mariadb_read_buffer_size }}
+read_rnd_buffer_size = {{ mariadb_read_rnd_buffer_size }}
+myisam_sort_buffer_size = {{ mariadb_myisam_sort_buffer_size }}
+group_concat_max_len = {{ mariadb_group_concat_max_len }}
+join_buffer_size = {{ mariadb_join_buffer_size }}
+bulk_insert_buffer_size = {{ mariadb_bulk_insert_buffer_size }}
+
+tmp_table_size = {{ mariadb_tmp_table_size }}
+max_heap_table_size = {{ mariadb_max_heap_table_size }}
+query_cache_type = {{ mariadb_query_cache_type }}
+query_cache_size = {{ mariadb_query_cache_size }}
+query_cache_limit = {{ mariadb_query_cache_limit }}
+max_connections = {{ mariadb_max_connections }}
+thread_cache_size = {{ mariadb_thread_cache_size }}
+
+# Other settings.
+max_connections = {{ mariadb_max_connections }}
+wait_timeout = {{ mariadb_wait_timeout }}
+lower_case_table_names = {{ mariadb_lower_case_table_names }}
+event_scheduler = {{ mariadb_event_scheduler_state }}
+default_storage_engine = {{ mariadb_default_storage_engine }}
+
+# InnoDB settings.
+innodb_large_prefix = {{ mariadb_innodb_large_prefix }}
+innodb_file_format = {{ mariadb_innodb_file_format }}
+innodb_file_per_table = {{ mariadb_innodb_file_per_table }}
+innodb_buffer_pool_size = {{ mariadb_innodb_buffer_pool_size }}
+innodb_log_file_size = {{ mariadb_innodb_log_file_size }}
+innodb_log_buffer_size = {{ mariadb_innodb_log_buffer_size }}
+innodb_flush_log_at_trx_commit = {{ mariadb_innodb_flush_log_at_trx_commit }}
+innodb_lock_wait_timeout = {{ mariadb_innodb_lock_wait_timeout }}
+
+binlog_format = {{ mariadb_binlog_format }}
+
+# Logging options
+{% if mariadb_log_error == 'syslog' or mariadb_log == 'syslog' %}
+syslog
+syslog-tag = {{ mariadb_syslog_tag }}
+{% else %}
+{% if mariadb_log_error %}log-error = {{ mariadb_log_error }}{% endif %}
+{% endif %}
+{% if mariadb_query_log_enabled %}
+# Query log
+general_log = 1
+general_log_file = {{ mariadb_query_log }}
+{% endif %}
+{% if mariadb_slow_query_log_enabled %}
+# Slow query log configuration.
+slow_query_log = 1
+slow_query_log_file = {{ mariadb_slow_query_log_file }}
+long_query_time = {{ mariadb_slow_query_time }}
+{% endif %}
+
+
+{% if mariadb_mysqld_options is defined and mariadb_mysqld_options is not none %}
+{% for key, value in mariadb_mysqld_options.iteritems() %}
+{{ key }}{% if value is not none %} = {{ value }}{% endif %}
+
+{% endfor %}
+
+{% endif %}
+
 [galera]
-# Mandatory settings
-wsrep_on=ON
-wsrep_provider={% if ansible_os_family == 'RedHat' %}/usr/lib64/galera/libgalera_smm.so{% else %}/usr/lib/galera/libgalera_smm.so{% endif %}
+wsrep_on = {{ mariadb_galera_wsrep }}
+wsrep_provider = {% if ansible_os_family == 'RedHat' %}/usr/lib64/galera/libgalera_smm.so{% else %}/usr/lib/galera/libgalera_smm.so{% endif %}
 
-wsrep_cluster_address=gcomm://{% if mariadb_galera_role != "primary" %}{{ mariadb_galera_primary }}{% endif %}
+wsrep_cluster_address = gcomm://{% if mariadb_galera_role != "primary" %}{{ mariadb_galera_primary }}{% endif %}
 
-binlog_format=ROW
-default_storage_engine=InnoDB
-innodb_autoinc_lock_mode=2
-#query_cache_size=0
-#
-# Allow server to accept connections on all interfaces.
-#
-#bind-address=0.0.0.0
-#
-# Optional setting
-#wsrep_slave_threads=1
-#innodb_flush_log_at_trx_commit=0
+{% if mariadb_galera_options is defined and mariadb_galera_options is not none %}
+{% for key, value in mariadb_galera_options.iteritems() %}
+{{ key }}{% if value is not none %} = {{ value }}{% endif %}
 
-# this is only for embedded server
-[embedded]
+{% endfor %}
 
-# This group is only read by MariaDB servers, not by MySQL.
-# If you use the same .cnf file for MySQL and MariaDB,
-# you can put MariaDB-only options here
-[mariadb]
-
-# This group is only read by MariaDB-10.1 servers.
-# If you use the same .cnf file for MariaDB of different versions,
-# use this group for options that older servers don't understand
-[mariadb-10.1]
-
-# This group is only read by MariaDB-10.2 servers.
-# If you use the same .cnf file for MariaDB of different versions,
-# use this group for options that older servers don't understand
-[mariadb-10.2]
+{% endif %}

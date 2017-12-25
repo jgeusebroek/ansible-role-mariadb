@@ -12,14 +12,9 @@
     key: '{{ mariadb_rpm_gpg_key }}'
     state: present
 
-- name: Ensure MariaDB-client is installed | Redhat
-  yum:
-    name: '{{ mariadb_client_package }}'
+- name: Ensure MariaDB packages are installed | Redhat
+  package:
+    name: '{{ item }}'
     state: installed
-  when: 'mariadb_install_client == True'
-
-- name: Ensure MariaDB-server is installed | Redhat
-  yum:
-    name: '{{ mariadb_server_package }}'
-    state: installed
-  when: 'mariadb_install_server == True'
+  with_items: '{{ mariadb_packages }}'
+  register: rh_mariadb_install_packages
