@@ -6,9 +6,9 @@
 
 - name: Ensure default user is present.
   mysql_user:
-    name: '{{ mariadb_user_name }}
+    name: '{{ mariadb_user_name }}'
     host: 'localhost'
-    password: ''{ mariadb_user_password }}'
+    password: '{ mariadb_user_password }}'
     priv: '*.*:ALL,GRANT'
     state: present
   when: mariadb_user_name != mariadb_root_username
