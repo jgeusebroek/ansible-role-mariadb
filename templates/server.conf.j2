@@ -5,7 +5,7 @@ port    = {{ mariadb_port }}
 socket  = {{ mariadb_socket }}
 
 {% if mariadb_client_options is defined and mariadb_client_options is not none %}
-{% for key, value in mariadb_client_options.iteritems() %}
+{% for key, value in mariadb_client_options.items() %}
 {{ key }}{% if value is not none %} = {{ value }}{% endif %}
 
 {% endfor %}
@@ -92,7 +92,7 @@ long_query_time = {{ mariadb_slow_query_time }}
 
 
 {% if mariadb_mysqld_options is defined and mariadb_mysqld_options is not none %}
-{% for key, value in mariadb_mysqld_options.iteritems() %}
+{% for key, value in mariadb_mysqld_options.items() %}
 {{ key }}{% if value is not none %} = {{ value }}{% endif %}
 
 {% endfor %}
@@ -106,7 +106,7 @@ wsrep_provider = {% if ansible_os_family == 'RedHat' %}/usr/lib64/galera/libgale
 wsrep_cluster_address = gcomm://{% if mariadb_galera_role != "primary" %}{{ mariadb_galera_primary }}{% endif %}
 
 {% if mariadb_galera_options is defined and mariadb_galera_options is not none %}
-{% for key, value in mariadb_galera_options.iteritems() %}
+{% for key, value in mariadb_galera_options.items() %}
 {{ key }}{% if value is not none %} = {{ value }}{% endif %}
 
 {% endfor %}
