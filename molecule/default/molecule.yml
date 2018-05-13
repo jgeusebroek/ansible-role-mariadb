@@ -27,19 +27,30 @@ platforms:
     #     - debian
     #   links:
     #     - centos7:centos7
-    - name: debian9
-      image: jgeusebroek/debian9-molecule
+    # - name: debian9
+    #   image: jgeusebroek/debian9-molecule
+    #   image_version: latest
+    #   privileged: true
+    #   command: /lib/systemd/systemd
+    #   volumes:
+    #     - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    #   groups:
+    #     - debian
+    #   links:
+    #     - centos7:centos7
+    - name: ubuntu1604
+      image: jgeusebroek/ubuntu1604-molecule
       image_version: latest
       privileged: true
       command: /lib/systemd/systemd
       volumes:
         - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
       groups:
-        - debian
+        - ubuntu
       links:
         - centos7:centos7
-    - name: ubuntu1604
-      image: jgeusebroek/ubuntu1604-molecule
+    - name: ubuntu1804
+      image: jgeusebroek/ubuntu1804-molecule
       image_version: latest
       privileged: true
       command: /lib/systemd/systemd
@@ -74,6 +85,10 @@ provisioner:
         mariadb_galera_primary: centos7
         skip_secure_installation: yes
       ubuntu1604:
+        mariadb_galera_role: nonprimary
+        mariadb_galera_primary: centos7
+        skip_secure_installation: yes
+      ubuntu1804:
         mariadb_galera_role: nonprimary
         mariadb_galera_primary: centos7
         skip_secure_installation: yes
