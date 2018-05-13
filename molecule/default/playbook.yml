@@ -2,7 +2,7 @@
 - hosts: all
 
   vars:
-    mariadb_version: 10.2
+    mariadb_version: 10.1
     mariadb_fetch_wsrep_status: True
     mariadb_bind_address: '0.0.0.0'
     mariadb_mysqld_options:
@@ -13,7 +13,7 @@
     - name: Ensure gnupg is installed on Debian 9 (Stretch)
       package:
         name: gnupg
-        state: installed
+        state: present
       changed_when: False
       when: ansible_distribution_release == 'stretch'
 
@@ -33,7 +33,7 @@
     - name: Ensure apt-utils is installed on Ubuntu | Debian / Ubuntu
       package:
         name: apt-utils
-        state: installed
+        state: present
       changed_when: False
       when: ansible_os_family == 'Debian'
 

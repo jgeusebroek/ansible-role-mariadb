@@ -15,6 +15,6 @@
 - name: Ensure MariaDB packages are installed | Redhat
   package:
     name: '{{ item }}'
-    state: installed
+    state: present
   with_items: '{{ mariadb_packages }}'
   register: rh_mariadb_install_packages

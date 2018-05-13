@@ -22,10 +22,10 @@
     mariadb_logbase_dir_mode: "{{ __mariadb_logbase_dir_mode }}"
   when: mariadb_logbase_dir_mode is not defined
 
-- include: setup-RedHat.yml
+- include_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- include: setup-Debian.yml
+- include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
 - name: Check if Mariadb packages were installed.
@@ -33,13 +33,13 @@
     mariadb_install_packages: "{{ (rh_mariadb_install_packages is defined and rh_mariadb_install_packages.changed)
       or (deb_mariadb_install_packages is defined and deb_mariadb_install_packages.changed) }}"
 
-- include: configure-server.yml
+- include_tasks: configure-server.yml
 
-- include: secure-installation.yml
+- include_tasks: secure-installation.yml
   when: skip_secure_installation is undefined
 
-- include: databases.yml
+- include_tasks: databases.yml
   when: (mariadb_databases | default([])) | length
 
-- include: users.yml
+- include_tasks: users.yml
   when: (mariadb_users | default([])) | length
