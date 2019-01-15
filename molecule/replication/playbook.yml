@@ -9,16 +9,6 @@
       'max_connections': '50'
       '#comment':
 
-    mariadb_galera_role: primary
-    mariadb_galera_primary: localhost
-    mariadb_databases:
-      - name: somedb
-    mariadb_users:
-      - name: someuser
-        host: "%"
-        password: somepassword
-        priv: "somedb.*:ALL"
-
   pre_tasks:
     - name: Ensure GnuPG is installed on Debian 9 (Stretch)
       package:
