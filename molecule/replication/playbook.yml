@@ -3,7 +3,7 @@
 
   vars:
     mariadb_version: 10.1
-    mariadb_fetch_wsrep_status: True
+    mariadb_fetch_wsrep_status: true
     mariadb_bind_address: '0.0.0.0'
     mariadb_mysqld_options:
       'max_connections': '50'
@@ -14,14 +14,14 @@
       package:
         name: gnupg
         state: present
-      changed_when: False
+      changed_when: false
       when: ansible_distribution_release == 'stretch'
 
     - name: Ensure apt-utils is installed on Ubuntu | Debian / Ubuntu
       package:
         name: apt-utils
         state: present
-      changed_when: False
+      changed_when: false
       when: ansible_os_family == 'Debian'
 
   roles:

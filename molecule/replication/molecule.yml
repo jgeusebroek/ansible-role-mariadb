@@ -1,72 +1,72 @@
 ---
 driver:
   name: docker
-lint:
-  name: yamllint
-  enabled: False
-  options:
-    config-file: molecule/replication/yamllint.yml
+lint: |
+  set -e
+  yamllint -c molecule/default/yamllint.yml .
+  ansible-lint
+  flake8
 platforms:
-    - name: centos7
-      image: jgeusebroek/centos7-molecule
-      image_version: latest
-      privileged: true
-      pre_build_image: true
-      command: /lib/systemd/systemd
-      volumes:
-        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      groups:
-        - redhat
-      networks:
-        - name: mariadb
-    - name: debian8
-      image: jgeusebroek/debian8-molecule
-      image_version: latest
-      privileged: true
-      pre_build_image: true
-      command: /lib/systemd/systemd
-      volumes:
-        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      groups:
-        - debian
-      networks:
-        - name: mariadb
-    - name: debian9
-      image: jgeusebroek/debian9-molecule
-      image_version: latest
-      privileged: true
-      pre_build_image: true
-      command: /lib/systemd/systemd
-      volumes:
-        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      groups:
-        - debian
-      networks:
-        - name: mariadb
-    - name: ubuntu1604
-      image: jgeusebroek/ubuntu1604-molecule
-      image_version: latest
-      privileged: true
-      pre_build_image: true
-      command: /lib/systemd/systemd
-      volumes:
-        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      groups:
-        - ubuntu
-      networks:
-        - name: mariadb
-    - name: ubuntu1804
-      image: jgeusebroek/ubuntu1804-molecule
-      image_version: latest
-      privileged: true
-      pre_build_image: true
-      command: /lib/systemd/systemd
-      volumes:
-        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      groups:
-        - ubuntu
-      networks:
-        - name: mariadb
+  - name: centos7
+    image: jgeusebroek/centos7-molecule
+    image_version: latest
+    privileged: true
+    pre_build_image: true
+    command: /lib/systemd/systemd
+    volumes:
+      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    groups:
+      - redhat
+    networks:
+      - name: mariadb
+  - name: debian8
+    image: jgeusebroek/debian8-molecule
+    image_version: latest
+    privileged: true
+    pre_build_image: true
+    command: /lib/systemd/systemd
+    volumes:
+      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    groups:
+      - debian
+    networks:
+      - name: mariadb
+  - name: debian9
+    image: jgeusebroek/debian9-molecule
+    image_version: latest
+    privileged: true
+    pre_build_image: true
+    command: /lib/systemd/systemd
+    volumes:
+      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    groups:
+      - debian
+    networks:
+      - name: mariadb
+  - name: ubuntu1604
+    image: jgeusebroek/ubuntu1604-molecule
+    image_version: latest
+    privileged: true
+    pre_build_image: true
+    command: /lib/systemd/systemd
+    volumes:
+      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    groups:
+      - ubuntu
+    networks:
+      - name: mariadb
+  - name: ubuntu1804
+    image: jgeusebroek/ubuntu1804-molecule
+    image_version: latest
+    privileged: true
+    pre_build_image: true
+    command: /lib/systemd/systemd
+    volumes:
+      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    groups:
+      - ubuntu
+    networks:
+      - name: mariadb
 provisioner:
   name: ansible
   lint:
@@ -84,21 +84,21 @@ provisioner:
             password: somepassword
             priv: "somedb.*:ALL"
       debian8:
-        mariadb_galera_role: nonprimary
+        mariadb_galera_role: falsenprimary
         mariadb_galera_primary: centos7
-        skip_secure_installation: yes
+        skip_secure_installation: true
       debian9:
-        mariadb_galera_role: nonprimary
+        mariadb_galera_role: falsenprimary
         mariadb_galera_primary: centos7
-        skip_secure_installation: yes
+        skip_secure_installation: true
       ubuntu1604:
-        mariadb_galera_role: nonprimary
+        mariadb_galera_role: falsenprimary
         mariadb_galera_primary: centos7
-        skip_secure_installation: yes
+        skip_secure_installation: true
       ubuntu1804:
-        mariadb_galera_role: nonprimary
+        mariadb_galera_role: falsenprimary
         mariadb_galera_primary: centos7
-        skip_secure_installation: yes
+        skip_secure_installation: true
 scenario:
   name: replication
 verifier:

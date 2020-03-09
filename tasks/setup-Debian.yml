@@ -10,7 +10,7 @@
   apt_repository:
     repo: 'deb {{ mariadb_apt_mirror_base }}/{{ mariadb_version }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} main'
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Ensure MariaDB packages are installed | Debian / Ubuntu
   package:

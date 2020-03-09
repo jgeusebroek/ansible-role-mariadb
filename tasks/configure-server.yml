@@ -1,3 +1,4 @@
+---
 - name: Ensure log directory exists
   file:
     path: '{{ mariadb_logbase_dir }}'
@@ -12,7 +13,7 @@
     src: 'server.conf.j2'
     dest: '{{ mariadb_server_config_location }}'
   notify:
-   - Restart MariaDB
+    - Restart MariaDB
 
 - name: Instantiate cluster on primary node, if not already done
   shell: galera_new_cluster
@@ -24,22 +25,22 @@
 # Flush handlers, to force restarting MariaDB BEFORE getting the status IF the server configuration has been changed
 # (otherwise the nodes might not have connected to eachother)
 - meta: flush_handlers
-  # when: mariadb_galera_role == "primary" and mariadb_fetch_wsrep_status == True
+# when: mariadb_galera_role == "primary" and mariadb_fetch_wsrep_status
 
 - name: Enable and start MariaDB-galera service
   service:
     name: 'mysql'
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Get MariaDB-Galera cluster status
   shell: mysql -u root -e "SHOW GLOBAL STATUS WHERE Variable_name IN ('wsrep_ready', 'wsrep_cluster_size', 'wsrep_cluster_status', 'wsrep_connected');"
   register: cluster_status
   changed_when: false
-  when: mariadb_galera_role == "primary" and mariadb_fetch_wsrep_status == True
+  when: mariadb_galera_role == "primary" and mariadb_fetch_wsrep_status
   tags: skip_ansible_lint
 
 - name: Show MariaDB-Galera cluster status
   debug: msg="{{ cluster_status.stdout_lines }}"
   changed_when: false
-  when: mariadb_galera_role == "primary" and mariadb_fetch_wsrep_status == True
+  when: mariadb_galera_role == "primary" and mariadb_fetch_wsrep_status

@@ -21,7 +21,7 @@
     owner: "{{ mariadb_user_name }}"
     mode: 0600
   when: mariadb_user_name != mariadb_root_username and (mariadb_install_packages | bool or mariadb_user_password_update)
-  no_log: True
+  no_log: true
 
 - name: Disallow root login remotely
   command: 'mysql -NBe "{{ item }}"'
@@ -33,7 +33,7 @@
   command: mysql -NBe "SELECT Host FROM mysql.user WHERE User = '{{ mariadb_root_username }}' ORDER BY (Host='localhost') DESC"
   register: mariadb_root_hosts
   changed_when: false
-  check_mode: no
+  check_mode: false
   when: mariadb_install_packages | bool or mariadb_root_password_update
 
 # - debug: msg="{{ mariadb_root_hosts.stdout_lines }}"
@@ -84,13 +84,13 @@
   command: mysql -NBe 'SELECT Host FROM mysql.user WHERE User = ""'
   register: mariadb_anonymous_hosts
   changed_when: false
-  check_mode: no
+  check_mode: false
 
 - name: Remove anonymous Mariadb users.
   mysql_user:
-     name: ""
-     host: "{{ item }}"
-     state: absent
+    name: ""
+    host: "{{ item }}"
+    state: absent
   with_items: "{{ mariadb_anonymous_hosts.stdout_lines|default([]) }}"
 
 - name: Remove Mariadb test database.
