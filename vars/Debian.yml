@@ -1,5 +1,6 @@
 ---
-mariadb_packages: [ 'mariadb-server', 'mariadb-client', 'python-mysqldb' ]
+mariadb_python_client: "{% if ansible_distribution == 'Ubuntu' and ansible_distribution_version is version('18.04', '>=') %}python3-mysqldb{% elif ansible_distribution == 'Debian' and ansible_distribution_major_version is version('9', '>=') %}python3-mysqldb{% else %}python-mysqldb{% endif %}"
+mariadb_packages: [ 'mariadb-server', 'mariadb-client', '{{ mariadb_python_client }}' ]
 mariadb_server_config_location: /etc/mysql/my.cnf
 
 __mariadb_logbase_dir: '/var/log/mysql'

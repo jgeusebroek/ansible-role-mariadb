@@ -34,4 +34,4 @@ MIT / BSD
 
 ## Author Information
 
-2017-2019 by [Jeroen Geusebroek](http://jeroengeusebroek.nl/).
+2017-2020 by [Jeroen Geusebroek](http://jeroengeusebroek.nl/).

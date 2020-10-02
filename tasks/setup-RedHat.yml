@@ -18,3 +18,15 @@
     state: present
   with_items: '{{ mariadb_packages }}'
   register: rh_mariadb_install_packages
+
+- name: Check for galera 4 libraries
+  stat:
+    path: /usr/lib64/galera-4
+  register: galera4_result
+
+- name: Symlink galera library directory to galera 4
+  file:
+    src: /usr/lib64/galera-4
+    dest: /usr/lib64/galera
+    state: link
+  when: galera4_result.stat.exists
