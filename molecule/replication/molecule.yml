@@ -84,19 +84,19 @@ provisioner:
             password: somepassword
             priv: "somedb.*:ALL"
       debian8:
-        mariadb_galera_role: falsenprimary
+        mariadb_galera_role: nonprimary
         mariadb_galera_primary: centos7
         skip_secure_installation: true
       debian9:
-        mariadb_galera_role: falsenprimary
+        mariadb_galera_role: nonprimary
         mariadb_galera_primary: centos7
         skip_secure_installation: true
       ubuntu1604:
-        mariadb_galera_role: falsenprimary
+        mariadb_galera_role: nonprimary
         mariadb_galera_primary: centos7
         skip_secure_installation: true
       ubuntu1804:
-        mariadb_galera_role: falsenprimary
+        mariadb_galera_role: nonprimary
         mariadb_galera_primary: centos7
         skip_secure_installation: true
 scenario:
