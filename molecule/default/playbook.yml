@@ -2,7 +2,7 @@
 - hosts: all
 
   vars:
-    mariadb_version: 10.1
+    mariadb_version: 10.5
     mariadb_fetch_wsrep_status: true
     mariadb_bind_address: '0.0.0.0'
     mariadb_mysqld_options:

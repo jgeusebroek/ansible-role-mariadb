@@ -12,6 +12,7 @@
   template:
     src: 'server.conf.j2'
     dest: '{{ mariadb_server_config_location }}'
+    mode: '0644'
   notify:
     - Restart MariaDB
 
