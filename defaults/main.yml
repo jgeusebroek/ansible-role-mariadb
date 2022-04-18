@@ -5,6 +5,7 @@ mariadb_apt_gpg_keys:
   - '0xF1656F24C74CD1D8'
 
 mariadb_version: '10.5'
+mariadb_maxscale_version: '6.2'
 mariadb_apt_mirror_base: 'http://ams2.mirrors.digitalocean.com/mariadb/repo'
 
 mariadb_fetch_wsrep_status: false
