@@ -5,6 +5,7 @@ mariadb_apt_gpg_keys:
   - '0xF1656F24C74CD1D8'
 
 mariadb_version: '10.5'
+mariadb_maxscale_version: '6.2'
 mariadb_apt_mirror_base: 'http://ams2.mirrors.digitalocean.com/mariadb/repo'
 
 mariadb_fetch_wsrep_status: false
@@ -43,6 +44,7 @@ mariadb_user_password_update: false
 mariadb_key_buffer_size: '256M'
 mariadb_max_allowed_packet: '64M'
 mariadb_table_open_cache: '256'
+mariadb_table_definition_cache: '256'
 mariadb_sort_buffer_size: '1M'
 mariadb_read_buffer_size: '1M'
 mariadb_bulk_insert_buffer_size: '16M'
