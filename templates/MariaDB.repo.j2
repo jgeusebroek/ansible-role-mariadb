@@ -6,6 +6,8 @@ gpgkey = file:///etc/pki/rpm-gpg/MariaDB-Server-GPG-KEY
 gpgcheck = 1
 enabled = 1
 
+
+
 [mariadb-maxscale]
 # To use the latest stable release of MaxScale, use "latest" as the version
 # To use the latest beta (or stable if no current beta) release of MaxScale, use "beta" as the version
@@ -14,6 +16,7 @@ baseurl = https://dlm.mariadb.com/repo/maxscale/{{ mariadb_maxscale_version }}/y
 gpgkey = file:///etc/pki/rpm-gpg/MariaDB-MaxScale-GPG-KEY
 gpgcheck = 1
 enabled = 1
+
 
 [mariadb-tools]
 name = MariaDB Tools
